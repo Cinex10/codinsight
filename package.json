@@ -1,0 +1,45 @@
+{
+  "name": "codinsight",
+  "displayName": "codinsight",
+  "description": "AI-powered code interpreter that explains and demystifies complex or legacy code",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.94.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.explainCode",
+        "title": "Codinsight: Explain Code"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.8",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.94.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.11.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "groq-sdk": "^0.7.0",
+    "highlight.js": "^11.10.0",
+    "marked": "^14.1.2"
+  },
+  "files": [
+    "media/prism.js",
+    "media/prism.css"
+  ]
+}
