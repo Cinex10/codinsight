@@ -1,65 +1,56 @@
-# codinsight README
+# Codinsight
 
-This is the README for your extension "codinsight". After writing up a brief description, we recommend including the following sections.
+Codinsight is a Visual Studio Code extension that helps developers understand code quickly and easily. It uses advanced language models to provide insightful explanations of selected code snippets, making it easier to comprehend complex or legacy code.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Code Explanation**: Select any piece of code and get a detailed explanation.
+- **Syntax Highlighting**: Explanations include syntax-highlighted code snippets for better readability.
+- **Context-Aware Analysis**: The extension considers the context of your code to provide more accurate explanations.
+- **Support for Multiple Languages**: Works with various programming languages supported by VS Code.
 
-For example if there is an image subfolder under your extension project workspace:
+## Installation
 
-\!\[feature X\]\(images/feature-x.png\)
+1. Open Visual Studio Code
+2. Go to the Extensions view (Ctrl+Shift+X)
+3. Search for "Codinsight"
+4. Click Install
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Usage
+
+1. Select a piece of code in your editor
+2. Right-click and choose "Explain Selected Code" from the context menu, or use the command palette (Ctrl+Shift+P) and type "Explain Selected Code"
+3. A new panel will open with a detailed explanation of the selected code
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- Visual Studio Code version 1.60.0 or higher
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+* `codinsight.maxTokens`: Maximum number of tokens to use for code explanation (default: 1000)
+* `codinsight.language`: Preferred language model for code explanation (default: "gpt-3.5-turbo")
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- Large code selections may take longer to process
+- Highly specialized or domain-specific code may receive generic explanations
 
-## Release Notes
+## Contributing
 
-Users appreciate release notes as you update your extension.
+We welcome contributions to Codinsight! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) file for details on how to get started.
 
-### 1.0.0
+## License
 
-Initial release of ...
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-### 1.0.1
+## Acknowledgments
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+- Thanks to the VS Code team for their excellent extension API
+- Powered by [OpenAI's GPT-3.5](https://openai.com/blog/gpt-3-5-turbo-0613/) (or your chosen language model)
 
 ---
 
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+For more information, please visit our [GitHub repository](https://github.com/yourusername/codinsight).
