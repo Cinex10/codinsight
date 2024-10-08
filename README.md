@@ -31,7 +31,7 @@ Codinsight is a Visual Studio Code extension that helps developers understand co
 This extension contributes the following settings:
 
 * `codinsight.maxTokens`: Maximum number of tokens to use for code explanation (default: 1000)
-* `codinsight.language`: Preferred language model for code explanation (default: "gpt-3.5-turbo")
+* `codinsight.language`: Preferred language model for code explanation (default: "llama3-8b-8192")
 
 ## Known Issues
 
