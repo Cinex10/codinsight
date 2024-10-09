@@ -35,22 +35,9 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-- Large code selections may take longer to process
 - Highly specialized or domain-specific code may receive generic explanations
 
-## Contributing
-
-We welcome contributions to Codinsight! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) file for details on how to get started.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
-## Acknowledgments
-
-- Thanks to the VS Code team for their excellent extension API
-- Powered by [OpenAI's GPT-3.5](https://openai.com/blog/gpt-3-5-turbo-0613/) (or your chosen language model)
-
----
-
-For more information, please visit our [GitHub repository](https://github.com/yourusername/codinsight).
