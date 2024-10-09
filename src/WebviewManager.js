@@ -47,15 +47,48 @@ class WebviewManager {
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Markdown Preview</title>
+                <title>Codinsight</title>
                 <style>
-                    body { font-family: var(--vscode-font-family); padding: 20px; color: var(--vscode-editor-foreground); }
-                    pre { background-color: var(--vscode-textCodeBlock-background); padding: 10px; border-radius: 5px; }
-                    code { font-family: var(--vscode-editor-font-family); }
+                    body {
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+                        line-height: 1.6;
+                        color: var(--vscode-editor-foreground);
+                        padding: 20px;
+                        max-width: 800px;
+                        margin: 0 auto;
+                    }
+                    h1, h2 {
+                        border-bottom: 1px solid var(--vscode-panel-border);
+                        padding-bottom: 10px;
+                        margin-top: 30px;
+                    }
+                    pre {
+                        background-color: var(--vscode-textCodeBlock-background);
+                        padding: 15px;
+                        border-radius: 5px;
+                        overflow-x: auto;
+                    }
+                    code {
+                        font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+                        font-size: 14px;
+                    }
+                    ul {
+                        padding-left: 20px;
+                    }
+                    li {
+                        margin-bottom: 10px;
+                    }
+                    .highlight {
+                        background-color: var(--vscode-editor-selectionBackground);
+                        padding: 2px 5px;
+                        border-radius: 3px;
+                    }
                 </style>
             </head>
             <body>
-                ${renderedHtml}
+                <div class="content">
+                    ${renderedHtml}
+                </div>
             </body>
             </html>
         `;
