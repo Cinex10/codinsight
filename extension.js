@@ -7,30 +7,44 @@ function activate(context) {
     console.log('Code Explainer extension is now active');
     
     let disposable = vscode.commands.registerCommand('extension.explainCode', async () => {
-        try {
-            const editor = vscode.window.activeTextEditor;
-            if (!editor) {
-                vscode.window.showInformationMessage('No active editor found.');
-                return;
+        vscode.window.withProgress({
+            location: vscode.ProgressLocation.Notification,
+            title: "Analyzing Code...",
+            cancellable: false
+        }, async (progress) => {
+            try {
+                progress.report({ increment: 0 });
+
+                const editor = vscode.window.activeTextEditor;
+                if (!editor) {
+                    vscode.window.showInformationMessage('No active editor found.');
+                    return;
+                }
+
+                progress.report({ increment: 20, message: "Preparing language manager..." });
+                const document = editor.document;
+                const languageManager = LanguageManagerFactory.getLanguageManager(document.languageId);
+                await languageManager.ensureLanguageMode(document);
+
+                progress.report({ increment: 20, message: "Extracting methods..." });
+                const methods = await languageManager.getMethodsSymbols(document.uri);
+                const code = await languageManager.getUserSelectedCode(editor, methods);
+
+                if (!code) return;
+
+                progress.report({ increment: 20, message: "Analyzing code..." });
+                const codeAnalyzer = new CodeAnalyzer(context);
+                const analysis = await codeAnalyzer.analyzeCode(code);
+
+                progress.report({ increment: 20, message: "Preparing results..." });
+                const webviewManager = new WebviewManager(context);
+                webviewManager.showAnalysis(analysis);
+
+                progress.report({ increment: 20, message: "Done!" });
+            } catch (error) {
+                vscode.window.showErrorMessage(`Error: ${error.message}`);
             }
-
-            const document = editor.document;
-            const languageManager = LanguageManagerFactory.getLanguageManager(document.languageId);
-            await languageManager.ensureLanguageMode(document);
-
-            const methods = await languageManager.getMethodsSymbols(document.uri);
-            const code = await languageManager.getUserSelectedCode(editor, methods);
-
-            if (!code) return;
-
-            const codeAnalyzer = new CodeAnalyzer();
-            const analysis = await codeAnalyzer.analyzeCode(code);
-
-            const webviewManager = new WebviewManager(context);
-            webviewManager.showAnalysis(analysis);
-        } catch (error) {
-            vscode.window.showErrorMessage(`Error: ${error.message}`);
-        }
+        });
     });
 
     context.subscriptions.push(disposable);
