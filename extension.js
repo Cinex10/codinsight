@@ -38,9 +38,10 @@ function activate(context) {
 
                 progress.report({ increment: 20, message: "Preparing results..." });
                 const webviewManager = new WebviewManager(context);
-                webviewManager.showAnalysis(analysis);
-
-                progress.report({ increment: 20, message: "Done!" });
+                if (analysis != null){
+                    webviewManager.showAnalysis(analysis);
+                    progress.report({ increment: 20, message: "Done!" });
+                }
             } catch (error) {
                 vscode.window.showErrorMessage(`Error: ${error.message}`);
             }

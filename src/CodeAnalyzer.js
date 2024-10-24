@@ -1,4 +1,3 @@
-const Groq = require('groq-sdk');
 const dotenv = require('dotenv');
 const path = require('path');
 
@@ -7,51 +6,55 @@ class CodeAnalyzer {
     constructor(context) {
         const rootPath = context.extensionPath;
         dotenv.config({ path: path.join(rootPath, '.env') });
-        this.apiKey = process.env.LLM_API_KEY;
-        this.groq = new Groq({ apiKey: this.apiKey });
+        this.endpoint = process.env.EXPLAIN_ENDPOINT;
     }
 
     async analyzeCode(code) {
         const prompt = `
-        Analyze the following code and provide an explanation in Markdown format. Your response should follow this exact structure:
+            Analyze the following code and provide an explanation in Markdown format. Your response should follow this exact structure:
 
-    ## Overview
-    ...
+            ## Overview
+            ...
 
-    ## Variables
-    ...
+            ## Variables
+            ...
 
-    ## Functions
-    ...
+            ## Functions
+            ...
 
-    ## Purpose
-    The overall purpose of this code seems to be \${}
+            ## Purpose
+            The overall purpose of this code seems to be \${}
 
-    - Overview: Provide a brief, high-level description of what the code does.
-    - Variables: List and explain each variable used in the code. Include their types (if apparent) and their roles.
-    - Functions: Describe each function in the code, including its parameters, what it does, and what it returns.
-    - Purpose: Infer and state the overall purpose or goal of this code.
+            - Overview: Provide a brief, high-level description of what the code does.
+            - Variables: List and explain each variable used in the code. Include their types (if apparent) and their roles.
+            - Functions: Describe each function in the code, including its parameters, what it does, and what it returns.
+            - Purpose: Infer and state the overall purpose or goal of this code.
 
-    Be concise but thorough in your explanations. Use proper Markdown formatting, including code blocks where appropriate.
+            Be concise but thorough in your explanations. Use proper Markdown formatting, including code blocks where appropriate.
 
-    Here is the code to analyze:
+            Here is the code to analyze:
 
-    \`\`\`
-    ${code}
-    \`\`\`
-        `;
+            \`\`\`
+            ${code}
+            \`\`\`
+            `;
 
-        const response = await this.groq.chat.completions.create({
-            messages: [
+            const response = await fetch(this.endpoint, 
                 {
-                    role: "user",
-                    content: prompt,
-                },
-            ],
-            model: "llama3-8b-8192",
-        });
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                      },
+                    body: JSON.stringify({
+                        prompt: prompt
+                      })
+                });
+            if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            return data['completion'];
 
-        return response['choices'][0]['message']['content'];
     }
 }
 

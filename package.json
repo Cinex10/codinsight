@@ -2,15 +2,23 @@
   "name": "codinsight",
   "displayName": "Codinsight",
   "description": "AI-powered code interpreter that explains and demystifies complex or legacy code",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "publisher": "Cinex10",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cinex10/codinsight.git"
+  },
   "engines": {
     "vscode": "^1.94.0"
   },
   "categories": [
-    "Other"
+    "Machine Learning",
+    "AI",
+    "Programming Languages"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./extension.js",
   "contributes": {
     "commands": [
@@ -37,7 +45,8 @@
     "dotenv": "^16.4.5",
     "groq-sdk": "^0.7.0",
     "highlight.js": "^11.10.0",
-    "marked": "^14.1.2"
+    "marked": "^14.1.3",
+    "vscode": "^1.1.34"
   },
   "icon": "media/icon.png"
 }
