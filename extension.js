@@ -26,9 +26,9 @@ function activate(context) {
                 const languageManager = LanguageManagerFactory.getLanguageManager(document.languageId);
                 await languageManager.ensureLanguageMode(document);
 
-                progress.report({ increment: 20, message: "Extracting methods..." });
-                const methods = await languageManager.getMethodsSymbols(document.uri);
-                const code = await languageManager.getUserSelectedCode(editor, methods);
+                progress.report({ increment: 20, message: "Extracting code..." });
+                // const methods = await languageManager.getMethodsSymbols(document.uri);
+                const code = await languageManager.getUserSelectedCode(editor);
 
                 if (!code) return;
 

@@ -14,24 +14,21 @@ class PythonLanguageManager extends LanguageManager {
         return symbols.filter(symbol => symbol.kind === vscode.SymbolKind.Function);
     }
 
-    async getUserSelectedCode(editor, methods) {
-        const FREE_SELECT_OPTION = 'Free code selection';
-        const options = [...methods.map(method => method.name), FREE_SELECT_OPTION];
+    async getUserSelectedCode(editor) {
+        // const FREE_SELECT_OPTION = 'Free code selection';
+        // const options = [
+        //     // ...methods.map(method => method.name), 
+        //     FREE_SELECT_OPTION];
 
-        const selection = await vscode.window.showQuickPick(options, {
-            placeHolder: 'Choose a method or select a portion of code'
-        });
+        // const selection = await vscode.window.showQuickPick(options, {
+        //     placeHolder: 'Choose a method or select a portion of code'
+        // });
 
-        if (!selection) return null;
+        // if (!selection) return null;
 
         const document = editor.document;
-        if (selection === FREE_SELECT_OPTION) {
-            const text = document.getText(editor.selection);
-            return this._handleFreeCodeSelection(text);
-        } else {
-            const method = methods.find(method => method.name === selection);
-            return this._getSymbolCode(document, method);
-        }
+        const text = document.getText(editor.selection);
+        return this._handleFreeCodeSelection(text);
     }
 
     _handleFreeCodeSelection(text) {

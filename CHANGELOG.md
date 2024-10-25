@@ -8,3 +8,4 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Change extension category.
 - Edit activation event.
+- Edit the logic to explain directly the selected code block
